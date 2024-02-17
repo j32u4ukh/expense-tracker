@@ -1,2 +1,46 @@
 <div class="container mt-5">
+    {{!-- 類別過濾 --}}
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown button
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+    </div>
+
+    {{!-- 總金額 --}}
+    <p>總金額:<span id="totalAmount">25600</span></p>
+
+    {{!-- 支出列表 --}}
+    <section>
+        <div class="record">
+            <i class="fa-solid fa-utensils category"></i>
+            <div class="summary">
+                <p class="title">午餐</p>
+                <p class="date">2024/02/17</p>
+            </div>
+            <div class="amount">197</div>
+            <button class="edit_btn">修改</button>
+            <button class="delete_btn">刪除</button>
+        </div>
+        <div class="record">
+            <i class="fa-solid fa-van-shuttle category"></i>
+            <div class="summary">
+                <p class="title">捷運</p>
+                <p class="date">2024/02/17</p>
+            </div>
+            <div class="amount">30</div>
+            <button class="edit_btn">修改</button>
+            <button class="delete_btn">刪除</button>
+        </div>
+    </section>
+
+    <form action="">
+        <button id="new" class="btn new-btn">
+            新增支出
+        </button>
+    </form>
 </div>

@@ -9,4 +9,12 @@ header{
     align-items: center;
     padding: 10px 50px;
     background: pink;
+}   
+
+.category{
+    color: #74C0FC;
+}
+
+.new-btn{
+    background-color: orange;
 }
