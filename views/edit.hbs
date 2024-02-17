@@ -31,16 +31,7 @@
     <div class="row mb-3">
         <label for="inputName" class="col-sm-2 col-form-label">類別*:</label>
         {{!-- 類別下拉選單 --}}
-        <div class="col-sm-3 dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown button
-            </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-        </div>
+        {{> category}}
     </div>  
     <div class="row mb-3">
         <label for="inputAmount" class="col-sm-2 col-form-label">金額*:</label>
@@ -57,7 +48,7 @@
     <div class="row mb-3">
         <label for="inputAmount" class="col-sm-2 col-form-label"></label>
         <div class="col-sm-3">   
-            <button type="submit" class="btn btn-primary">新增支出</button>
+            <button type="submit" class="btn btn-primary">送出</button>
         </div>
     </div>
 </form>

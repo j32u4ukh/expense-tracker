@@ -10,7 +10,9 @@ const CATEGORY = {
 };
 
 router.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", {
+    totalAmount: 25260,
+  });
 });
 
 router.get("/new", (req, res) => {
