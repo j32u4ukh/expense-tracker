@@ -18,7 +18,13 @@ router.get("/new", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  res.render("edit");
+  res.render("edit", {
+    record: {
+      name: "Dad",
+      date: "2015-02-01",
+      amount: 379,
+    },
+  });
 });
 
 module.exports = router;
