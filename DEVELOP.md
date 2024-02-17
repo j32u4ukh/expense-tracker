@@ -43,6 +43,21 @@ npx sequelize model:generate --name record --attributes name:string,date:date,am
 npx sequelize db:migrate
 ```
 
-## Seed
+## 建立 Seeder 檔案
 
-建立 Seed 檔案: `npx sequelize seed:generate --name initial-data`
+```
+npx sequelize seed:generate --name categorySeeder
+npx sequelize seed:generate --name recordSeeder
+```
+
+# 執行 Seeder 腳本
+
+```
+npm run seed
+```
+
+上方指令實際會執行下方指令
+
+```
+npx sequelize-cli db:seed --seed ./seeders/categorySeeder.js && npx sequelize-cli db:seed --seed ./seeders/recordSeeder.js
+```
