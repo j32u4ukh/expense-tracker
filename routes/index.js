@@ -9,24 +9,12 @@ const CATEGORY = {
   其他: "https://fontawesome.com/icons/pen?style=solid",
 };
 
-router.get("/", (req, res) => {
-  res.render("index", {
-    totalAmount: 25260,
-  });
-});
+// 支出記錄路由
+const apis = require("./apis/index");
+router.use("/apis", apis);
 
-router.get("/new", (req, res) => {
-  res.render("new");
-});
-
-router.get("/:id", (req, res) => {
-  res.render("edit", {
-    record: {
-      name: "Dad",
-      date: "2015-02-01",
-      amount: 379,
-    },
-  });
-});
+// 支出記錄路由
+const records = require("./records");
+router.use("/records", records);
 
 module.exports = router;
