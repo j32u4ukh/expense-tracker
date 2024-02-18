@@ -5,4 +5,8 @@ const router = express.Router();
 const records = require("./records");
 router.use("/records", records);
 
+// 用戶數據
+const users = require("./users");
+router.use("/users", users);
+
 module.exports = router;
