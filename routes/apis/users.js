@@ -57,9 +57,9 @@ router.get("/:id", (req, res) => {
   User.get({ id })
     .then((user) => {
       if (user) {
-        res.json(user);
+        return res.json(user);
       } else {
-        res.status(404).json({
+        return res.status(404).json({
           msg: `沒有 id 為 ${id} 的用戶`,
         });
       }
