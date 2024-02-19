@@ -3,29 +3,41 @@
     {{> category}}
 
     {{!-- 總金額 --}}
-    <p>總金額:<span>{{totalAmount}}</span></p>
+    <div id="displayTotalAmount">
+        <div>總金額:</div>
+        <div id="totalAmount">{{totalAmount}}</div>
+    </div>
 
     {{!-- 支出列表 --}}
     <section>
         <div class="record">
-            <i class="fa-solid fa-utensils category"></i>
-            <div class="summary">
-                <p class="title">午餐</p>
-                <p class="date">2024/02/17</p>
+            <div class="content">
+                <div class="category_img">
+                    <i class="fa-solid fa-utensils"></i>
+                </div>                
+                <div class="summary">
+                    <span class="title">午餐</span><br/>
+                    <span class="date">2024/02/17</span>
+                </div>
+                <div class="amount">197</div>
             </div>
-            <div class="amount">197</div>
-            <button class="edit_btn">修改</button>
-            <button class="delete_btn">刪除</button>
+            <button class="btn edit_btn">修改</button>
+            <button class="btn delete_btn">刪除</button>
         </div>
+        
         <div class="record">
-            <i class="fa-solid fa-van-shuttle category"></i>
-            <div class="summary">
-                <p class="title">捷運</p>
-                <p class="date">2024/02/17</p>
+            <div class="content">
+                <div class="category_img">
+                    <i class="fa-solid fa-van-shuttle"></i>
+                </div>                
+                <div class="summary">
+                    <span class="title">捷運</span><br/>
+                    <span class="date">2024/02/17</span>
+                </div>
+                <div class="amount">30</div>
             </div>
-            <div class="amount">30</div>
-            <button class="edit_btn">修改</button>
-            <button class="delete_btn">刪除</button>
+            <button class="btn edit_btn">修改</button>
+            <button class="btn delete_btn">刪除</button>
         </div>
     </section>
 

@@ -2,19 +2,71 @@
     box-sizing: border-box;
 }
 
+:root{
+    --category_img_size: 50px;
+    --summary_size: 300px;
+    --amount_size: 70px;
+    --padding_size: 5px;
+}
+
 header{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 10px 50px;
-    background: pink;
+    background: #ecebeb;
 }   
 
-.category{
+.btn-logout{
+    border: 1px solid black;
+    color: orange;
+}
+
+#displayTotalAmount{
+    display: flex;
+}
+
+#totalAmount{
+    color: #ec673e;
+    font-weight: 500;
+    font-size: 6em;
+    margin-left: 30px;
+}
+
+.record{
+    display: flex;
+    margin: 10px;
+}
+
+.content{
+    display: flex;
+    align-items: center;
+    background-color: #f4f3f4;
+    padding: var(--padding_size);
+}
+
+.category_img{
     color: #74C0FC;
+    min-width: var(--category_img_size);
+    min-height: var(--category_img_size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.summary{
+    min-width: var(--summary_size);
+    padding: var(--padding_size);
+}
+
+.amount{
+    min-width: var(--amount_size);
+    display: flex;
+    justify-content: flex-end;
+    padding: var(--padding_size);
 }
 
 .new-btn{
-    background-color: orange;
+    background-color: #ec673e;
 }
