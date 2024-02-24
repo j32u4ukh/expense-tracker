@@ -10,35 +10,26 @@
 
     {{!-- 支出列表 --}}
     <section class="records">
-        <div class="record">
-            <div class="content">
-                <div class="category_img">
-                    <i class="fa-solid fa-utensils"></i>
-                </div>                
-                <div class="summary">
-                    <span class="title">午餐</span><br/>
-                    <span class="date">2024/02/17</span>
+        {{#if records}}
+          {{#each records as |record|}}
+            <div class="record">
+                <div class="content">
+                    <div class="category_img">
+                        <img src="{{record.src}}" alt="" class="icon">
+                    </div>                
+                    <div class="summary">
+                        <span class="title">{{record.name}}</span><br/>
+                        <span class="date">{{record.date}}</span>
+                    </div>
+                    <div class="amount">{{record.amount}}</div>
                 </div>
-                <div class="amount">197</div>
+                <button class="btn edit_btn" data-edit-id="{{record.id}}">修改</button>
+                <button class="btn delete_btn" data-delete-id="{{record.id}}">刪除</button>
             </div>
-            <button class="btn edit_btn">修改</button>
-            <button class="btn delete_btn">刪除</button>
-        </div>
-        
-        <div class="record">
-            <div class="content">
-                <div class="category_img">
-                    <i class="fa-solid fa-van-shuttle"></i>
-                </div>                
-                <div class="summary">
-                    <span class="title">捷運</span><br/>
-                    <span class="date">2024/02/17</span>
-                </div>
-                <div class="amount">30</div>
-            </div>
-            <button class="btn edit_btn">修改</button>
-            <button class="btn delete_btn">刪除</button>
-        </div>
+          {{/each}}
+        {{else}}
+          <p>No found records</p>
+        {{/if}}
     </section>
 
     <form action="">
@@ -47,3 +38,26 @@
         </button>
     </form>
 </div>
+
+<script type="text/javascript">
+    const records = document.querySelector('.records')
+    records.addEventListener('click', function onButtonClicked(e) {
+        const target = e.target
+        const classList = target.classList
+        if(classList.contains('edit_btn')){
+            const id = target.dataset.editId
+            location.href = `/records/${id}`
+        }else if(classList.contains('delete_btn')){
+            const id = target.dataset.deleteId
+            const url = `/apis/records/${id}`
+            axios
+            .delete(url)
+            .then((response) =>{
+                console.log(`response: ${response}`)
+                location.href = `/records`
+            }).catch((error)=>{
+                console.log(error)
+            })
+        }
+    })
+</script>

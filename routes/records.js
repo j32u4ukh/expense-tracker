@@ -1,11 +1,25 @@
 const express = require("express");
 const router = express.Router();
-const Record = require("../services/record");
+const { Record, CATEGORY } = require("../services/record");
 
 router.get("/", (req, res) => {
-  res.render("index", {
-    totalAmount: 25260,
-  });
+  let totalAmount = 0;
+  const records = [];
+  Record.getRecords({ userId: 1 })
+    .then((datas) => {
+      datas.forEach((data) => {
+        console.log(`data: ${JSON.stringify(data)}`);
+        totalAmount += Number(data.amount);
+        data = Record.formatData(data);
+        records.push(data);
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      res.render("index", { totalAmount, records });
+    });
 });
 
 router.get("/new", (req, res) => {

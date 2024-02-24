@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Record = require("../../services/record");
+const { Record, _ } = require("../../services/record");
 
 router.get("/", (req, res) => {
   const userId = req.query.userId;

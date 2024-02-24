@@ -1,8 +1,31 @@
 const db = require("../models");
 const RecordModel = db.record;
 
+const CATEGORY = {
+  1: {
+    description: "家居物業",
+    url: "https://fontawesome.com/icons/home?style=solid",
+  },
+  2: {
+    description: "交通出行",
+    url: "https://fontawesome.com/icons/shuttle-van?style=solid",
+  },
+  3: {
+    description: "休閒娛樂",
+    url: "https://fontawesome.com/icons/grin-beam?style=solid",
+  },
+  4: {
+    description: "餐飲食品",
+    url: "https://fontawesome.com/icons/utensils?style=solid",
+  },
+  5: {
+    description: "其他",
+    url: "https://fontawesome.com/icons/pen?style=solid",
+  },
+};
+
 class RecordService {
-  getRecords(userId, categoryId) {
+  getRecords({ userId, categoryId }) {
     let where = {};
     if (userId && categoryId) {
       where = { userId, categoryId };
@@ -96,7 +119,15 @@ class RecordService {
         });
     });
   }
+  formatData(record) {
+    const date = new Date(record.date);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    record.date = `${year}-${month}-${day}`;
+    return record;
+  }
 }
 
 const Record = new RecordService();
-module.exports = Record;
+module.exports = { Record, CATEGORY };

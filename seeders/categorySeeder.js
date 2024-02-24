@@ -1,36 +1,38 @@
 "use strict";
 
+const { _, CATEGORY } = require("../services/record");
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert("categories", [
       {
         id: 1,
-        name: "家居物業",
+        name: CATEGORY[1].description,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: 2,
-        name: "交通出行",
+        name: CATEGORY[2].description,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: 3,
-        name: "休閒娛樂",
+        name: CATEGORY[3].description,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: 4,
-        name: "餐飲食品",
+        name: CATEGORY[4].description,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: 5,
-        name: "其他",
+        name: CATEGORY[5].description,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
