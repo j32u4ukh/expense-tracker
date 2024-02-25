@@ -15,20 +15,20 @@
             <div class="record">
                 <div class="content">
                     <div class="category_img">
-                        <img src="{{record.src}}" alt="" class="icon">
+                        <i class="{{record.icon}}"></i>
                     </div>                
                     <div class="summary">
                         <span class="title">{{record.name}}</span><br/>
                         <span class="date">{{record.date}}</span>
                     </div>
                     <div class="amount">{{record.amount}}</div>
-                </div> 
-                <form action="/records/{{record.id}}" method="GET">
+                </div>                     
+                <form action="/records/{{record.id}}" method="GET" class="record-btn">
                     <button id="new" class="btn edit_btn">
                         修改
                     </button>
                 </form> 
-                <form action="/records/{{record.id}}?_method=DELETE" method="POST">
+                <form action="/records/{{record.id}}?_method=DELETE" method="POST" class="record-btn">
                     <button id="new" class="btn delete_btn">
                         刪除
                     </button>
@@ -46,3 +46,16 @@
         </button>
     </form>
 </div>
+
+<script type="text/javascript">
+    const menu = document.querySelector("#dropdown-menu")
+    menu.selectedIndex = 0
+    menu.addEventListener("change", function onOptionCahged(e){
+        let url = "/records"
+        if(menu.selectedIndex !== 0){
+            url += `?categoryId=${menu.selectedIndex}`
+        }
+        console.log(url)
+        axios.get(url)
+    })
+</script>

@@ -67,6 +67,11 @@ header{
     padding: var(--padding_size);
 }
 
+.record-btn{
+    display: flex;
+    align-items: center;
+}
+
 .new-btn{
     background-color: #ec673e;
     border: 1px solid black;

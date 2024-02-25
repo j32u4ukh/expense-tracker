@@ -4,23 +4,28 @@ const RecordModel = db.record;
 const CATEGORY = {
   1: {
     description: "家居物業",
-    url: "https://fontawesome.com/icons/home?style=solid",
+    // https://fontawesome.com/icons/home?style=solid
+    icon: "fa-solid fa-house",
   },
   2: {
     description: "交通出行",
-    url: "https://fontawesome.com/icons/shuttle-van?style=solid",
+    // https://fontawesome.com/icons/shuttle-van?style=solid
+    icon: "fa-solid fa-van-shuttle",
   },
   3: {
     description: "休閒娛樂",
-    url: "https://fontawesome.com/icons/grin-beam?style=solid",
+    // https://fontawesome.com/icons/grin-beam?style=solid
+    icon: "fa-solid fa-face-grin-beam",
   },
   4: {
     description: "餐飲食品",
-    url: "https://fontawesome.com/icons/utensils?style=solid",
+    // https://fontawesome.com/icons/utensils?style=solid
+    icon: "fa-solid fa-utensils",
   },
   5: {
     description: "其他",
-    url: "https://fontawesome.com/icons/pen?style=solid",
+    // https://fontawesome.com/icons/pen?style=solid
+    icon: "fa-solid fa-pen",
   },
 };
 
@@ -125,6 +130,7 @@ class RecordService {
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
     record.date = `${year}-${month}-${day}`;
+    record.icon = CATEGORY[record.categoryId].icon;
     return record;
   }
 }

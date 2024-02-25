@@ -9,8 +9,11 @@ router.use(express.urlencoded({ extended: true }));
 router.get("/", (req, res) => {
   let totalAmount = 0;
   const records = [];
-  Record.getRecords({ userId: 1 })
+  const categoryId = req.query.categoryId ?? null;
+  console.log(`categoryId: ${categoryId}`);
+  Record.getRecords({ userId: 1, categoryId })
     .then((datas) => {
+      console.log(`datas: ${JSON.stringify(datas)}`);
       datas.forEach((data) => {
         console.log(`data: ${JSON.stringify(data)}`);
         totalAmount += Number(data.amount);
@@ -22,6 +25,7 @@ router.get("/", (req, res) => {
       console.log(error);
     })
     .finally(() => {
+      console.log(`records: ${JSON.stringify(records)}`);
       res.render("index", { totalAmount, records });
     });
 });
