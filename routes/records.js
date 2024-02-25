@@ -3,6 +3,9 @@ const router = express.Router();
 const { Record, CATEGORY } = require("../services/record");
 const utils = require("../services/utils");
 
+// 需要使用 express.urlencoded 來從請求網址中獲取表單資料，否則就會回傳 undefined
+router.use(express.urlencoded({ extended: true }));
+
 router.get("/", (req, res) => {
   let totalAmount = 0;
   const records = [];
