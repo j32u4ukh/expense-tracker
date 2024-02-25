@@ -1,6 +1,6 @@
-<form class="container mt-5">
+<form class="container mt-5" action="/records/new" method="post">
   <div class="row mb-3">
-    <label for="inputName" class="col-sm-2 col-form-label">*必填欄位</label>
+    <label class="col-sm-2 col-form-label">*必填欄位</label>
     <div class="col-sm-3 col-form-label">
       <span class="title">請輸入你的支出</span>
     </div>
@@ -8,11 +8,11 @@
   <div class="row mb-3">
     <label for="inputName" class="col-sm-2 col-form-label">名稱*:</label>
     <div class="col-sm-3">
-      <input type="text" class="form-control" id="inputName" required />
+      <input type="text" class="form-control" id="inputName" name="name" required />
     </div>
   </div>
   <div class="row mb-3">
-    <label for="inputName" class="col-sm-2 col-form-label">日期*:</label>
+    <label for="date" class="col-sm-2 col-form-label">日期*:</label>
     <div class="col-sm-3">
       <input
         type="date"
@@ -27,7 +27,7 @@
     </div>
   </div>
   <div class="row mb-3">
-    <label for="inputName" class="col-sm-2 col-form-label">類別*:</label>
+    <label for="dropdown-menu" class="col-sm-2 col-form-label">類別*:</label>
     {{! 類別下拉選單 }} 
     {{> category}}
   </div>
@@ -38,13 +38,15 @@
         type="number"
         class="form-control"
         id="inputAmount"
+        name="amount"
         min="0"
         required
       />
     </div>
   </div>
+  <input name="userId" type="number" class="d-none" value="1"/>
   <div class="row mb-3">
-    <label for="inputAmount" class="col-sm-2 col-form-label"></label>
+    <label class="col-sm-2 col-form-label"></label>
     <div class="col-sm-3">
       <button type="submit" class="btn btn-primary">新增支出</button>
     </div>

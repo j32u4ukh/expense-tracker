@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Record, CATEGORY } = require("../services/record");
+const utils = require("../services/utils");
 
 router.get("/", (req, res) => {
   let totalAmount = 0;
@@ -24,6 +25,46 @@ router.get("/", (req, res) => {
 
 router.get("/new", (req, res) => {
   res.render("new");
+});
+
+router.post("/new", (req, res) => {
+  const BODY = req.body;
+  console.log(`BODY: ${JSON.stringify(BODY)}, type: ${typeof BODY}`);
+  console.log(`name: ${BODY.name}`);
+  if (!utils.isValidParam(BODY, "name")) {
+    console.log("name 為必填欄位");
+    return;
+  }
+  if (!utils.isValidParam(BODY, "date")) {
+    console.log("date 為必填欄位");
+    return;
+  }
+  if (!utils.isValidParam(BODY, "amount")) {
+    console.log("amount 為必填欄位");
+    return;
+  }
+  if (!utils.isValidParam(BODY, "userId")) {
+    console.log("userId 為必填欄位");
+    return;
+  }
+  if (!utils.isValidParam(BODY, "categoryId")) {
+    console.log("categoryId 為必填欄位");
+    return;
+  }
+  const { name, date, amount, userId, categoryId } = BODY;
+  console.log(
+    `POST /records/new | name: ${name}, date: ${date}, amount: ${amount}, userId: ${userId}, categoryId: ${categoryId}`
+  );
+  Record.add({ name, date, amount, userId, categoryId })
+    .then((record) => {
+      console.log(`record: ${JSON.stringify(record)}`);
+    })
+    .catch((err) => {
+      console.log(`新增支出紀錄時發生錯誤, err: ${err}`);
+    })
+    .finally(() => {
+      res.redirect("/records");
+    });
 });
 
 router.get("/:id", (req, res) => {
