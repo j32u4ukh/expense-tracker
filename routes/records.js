@@ -154,4 +154,29 @@ router.put("/:id", (req, res) => {
     });
 });
 
+router.delete("/:id", (req, res) => {
+  const id = req.params.id;
+  Record.isExists(id)
+    .then((isExists) => {
+      if (!isExists) {
+        console.log(`沒有 id 為 ${id} 的支出紀錄`);
+        return res.redirect("/records");
+      }
+      Record.delete(id)
+        .then((ok) => {
+          console.log(`delete result: ${ok}`);
+        })
+        .catch((err) => {
+          console.log(`delete err: ${err}`);
+        })
+        .finally(() => {
+          return res.redirect("/records");
+        });
+    })
+    .catch((error) => {
+      console.log(`delete error: ${error}`);
+      return res.redirect("/records");
+    });
+});
+
 module.exports = router;
