@@ -5,9 +5,17 @@ const { Record, _ } = require("../../services/record");
 router.get("/", (req, res) => {
   const userId = req.query.userId;
   const categoryId = req.query.categoryId;
+  let totalAmount = 0;
+  const records = [];
   Record.getRecords(userId, categoryId)
-    .then((records) => {
-      res.json(records);
+    .then((datas) => {
+      datas.forEach((data) => {
+        console.log(`data: ${JSON.stringify(data)}`);
+        totalAmount += Number(data.amount);
+        data = Record.formatData(data);
+        records.push(data);
+      });
+      res.json({ records, totalAmount });
     })
     .catch((err) => {
       res.status(500).json({ err });

@@ -9,10 +9,10 @@
     </div>
 
     {{!-- 支出列表 --}}
-    <section class="records">
+    <section class="records" id="records">
         {{#if records}}
           {{#each records as |record|}}
-            <div class="record">
+            <div class="record" data-cid="{{record.categoryId}}">
                 <div class="content">
                     <div class="category_img">
                         <i class="{{record.icon}}"></i>
@@ -24,12 +24,12 @@
                     <div class="amount">{{record.amount}}</div>
                 </div>                     
                 <form action="/records/{{record.id}}" method="GET" class="record-btn">
-                    <button id="new" class="btn edit_btn">
+                    <button class="btn">
                         修改
                     </button>
                 </form> 
                 <form action="/records/{{record.id}}?_method=DELETE" method="POST" class="record-btn">
-                    <button id="new" class="btn delete_btn">
+                    <button class="btn">
                         刪除
                     </button>
                 </form>
@@ -49,13 +49,36 @@
 
 <script type="text/javascript">
     const menu = document.querySelector("#dropdown-menu")
+    const records = document.querySelectorAll(".record")
+    const totalAmount = document.querySelector("#totalAmount")
     menu.selectedIndex = 0
+    function getAmount(record){
+        const amount = record.querySelector(".amount")
+        return Number(amount.innerHTML)
+    }
     menu.addEventListener("change", function onOptionCahged(e){
-        let url = "/records"
-        if(menu.selectedIndex !== 0){
-            url += `?categoryId=${menu.selectedIndex}`
-        }
-        console.log(url)
-        axios.get(url)
+        let total = 0
+        records.forEach((record)=>{
+            if(menu.selectedIndex === 0){
+                total += getAmount(record)
+                if(record.classList.contains("d-none")){
+                    record.classList.remove("d-none")
+                }
+            }else{                
+                const categoryId = record.dataset.cid
+                
+                if(categoryId == menu.selectedIndex){                    
+                    total += getAmount(record)   
+                    if(record.classList.contains("d-none")){
+                        record.classList.remove("d-none")
+                    }
+                }else{
+                    if(!record.classList.contains("d-none")){
+                        record.classList.add("d-none")
+                    }
+                }
+            }
+        })
+        totalAmount.innerHTML = total
     })
 </script>
