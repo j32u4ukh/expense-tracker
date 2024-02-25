@@ -27,13 +27,13 @@ router.get("/", (req, res) => {
 });
 
 router.get("/new", (req, res) => {
-  res.render("new");
+  res.render("new", {
+    userId,
+  });
 });
 
 router.post("/new", (req, res) => {
   const BODY = req.body;
-  console.log(`BODY: ${JSON.stringify(BODY)}, type: ${typeof BODY}`);
-  console.log(`name: ${BODY.name}`);
   if (!utils.isValidParam(BODY, "name")) {
     console.log("name 為必填欄位");
     return;
@@ -71,13 +71,87 @@ router.post("/new", (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  res.render("edit", {
-    record: {
-      name: "Dad",
-      date: "2015-02-01",
-      amount: 379,
-    },
-  });
+  const id = req.params.id;
+  const userId = 1;
+  Record.isExists(id)
+    .then((isExists) => {
+      if (!isExists) {
+        console.log(`沒有 id 為 ${id} 的支出紀錄`);
+        return res.redirect("/records");
+      }
+      Record.get(id).then((record) => {
+        if (!record) {
+          return res.redirect("/records");
+        }
+        const data = Record.formatData(record);
+        return res.render("edit", {
+          id,
+          userId,
+          record: {
+            name: data.name,
+            date: data.date,
+            amount: data.amount,
+          },
+        });
+      });
+    })
+    .catch((error) => {
+      console.log(`error: ${error}`);
+      return res.redirect("/records");
+    });
+});
+
+router.put("/:id", (req, res) => {
+  const BODY = req.body;
+  console.log(`BODY: ${JSON.stringify(BODY)}, type: ${typeof BODY}`);
+  console.log(`name: ${BODY.name}`);
+  if (!utils.isValidParam(BODY, "name")) {
+    console.log("name 為必填欄位");
+    return;
+  }
+  if (!utils.isValidParam(BODY, "date")) {
+    console.log("date 為必填欄位");
+    return;
+  }
+  if (!utils.isValidParam(BODY, "amount")) {
+    console.log("amount 為必填欄位");
+    return;
+  }
+  if (!utils.isValidParam(BODY, "userId")) {
+    console.log("userId 為必填欄位");
+    return;
+  }
+  if (!utils.isValidParam(BODY, "categoryId")) {
+    console.log("categoryId 為必填欄位");
+    return;
+  }
+  const { name, date, amount, userId, categoryId } = BODY;
+  console.log(
+    `POST /records/new | name: ${name}, date: ${date}, amount: ${amount}, userId: ${userId}, categoryId: ${categoryId}`
+  );
+  const id = req.params.id;
+  console.log(`id: ${id}`);
+  Record.isExists(id)
+    .then((isExists) => {
+      if (!isExists) {
+        console.log(`沒有 id 為 ${id} 的支出紀錄`);
+        return res.redirect("/records");
+      }
+      const record = { id, name, date, amount, userId, categoryId };
+      Record.update(record)
+        .then((ok) => {
+          console.log(`ok: ${ok}`);
+        })
+        .catch((error) => {
+          console.log(`error: ${error}`);
+        })
+        .finally(() => {
+          return res.redirect("/records");
+        });
+    })
+    .catch((error) => {
+      console.log(`error: ${error}`);
+    });
 });
 
 module.exports = router;

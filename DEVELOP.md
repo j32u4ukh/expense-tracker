@@ -43,6 +43,34 @@ npx sequelize model:generate --name record --attributes name:string,date:date,am
 npx sequelize db:migrate
 ```
 
+
+### Step 4 添加數據解析用的中間件
+
+```javascript
+// For json data
+// 使用 express.json() 中間件來解析 POST 請求的 JSON 數據
+router.use(express.json());
+
+// For form data
+// 需要使用 express.urlencoded 來從請求網址中獲取表單資料，否則就會回傳 undefined
+router.use(express.urlencoded({ extended: true }));
+```
+
+### Step 5 允許表單使用 GET 和 POST 以外的方法
+
+安裝依賴套件
+
+```
+npm install method-override@3.0.0
+```
+
+```javascript
+const methodOverride = require("method-override");
+
+// 「覆寫 (override)」HTTP 方法，允許表單傳送 GET 和 POST 以外的方法
+app.use(methodOverride("_method"));
+```
+
 ## 建立 Seeder 檔案
 
 ```
