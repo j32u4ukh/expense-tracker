@@ -33,7 +33,9 @@
   <body>
     <header>
       <h1 style="font-weight: 600;">家庭記帳本</h1>
-      <button class="btn btn-logout">登出</button>
+      <form action="/logout" method="POST">
+        <button type="submit" class="btn btn-logout">登出</button>
+      </form>
     </header>
 
     {{! 載入共用腳本 }}

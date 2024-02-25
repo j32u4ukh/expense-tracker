@@ -1,17 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const { Record, CATEGORY } = require("../services/record");
+const { Record, _ } = require("../services/record");
 const utils = require("../services/utils");
 
 // 需要使用 express.urlencoded 來從請求網址中獲取表單資料，否則就會回傳 undefined
 router.use(express.urlencoded({ extended: true }));
 
 router.get("/", (req, res) => {
-  let totalAmount = 0;
+  const userId = req.user.id;
   const records = [];
-  const categoryId = req.query.categoryId ?? null;
+  const categoryId = req.query.categoryId;
+  let totalAmount = 0;
   console.log(`categoryId: ${categoryId}`);
-  Record.getRecords({ userId: 1, categoryId })
+  Record.getRecords({ userId, categoryId })
     .then((datas) => {
       console.log(`datas: ${JSON.stringify(datas)}`);
       datas.forEach((data) => {
@@ -31,6 +32,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/new", (req, res) => {
+  const userId = req.user.id;
   res.render("new", {
     userId,
   });
@@ -50,15 +52,12 @@ router.post("/new", (req, res) => {
     console.log("amount 為必填欄位");
     return;
   }
-  if (!utils.isValidParam(BODY, "userId")) {
-    console.log("userId 為必填欄位");
-    return;
-  }
   if (!utils.isValidParam(BODY, "categoryId")) {
     console.log("categoryId 為必填欄位");
     return;
   }
-  const { name, date, amount, userId, categoryId } = BODY;
+  const { name, date, amount, categoryId } = BODY;
+  const userId = req.user.id;
   console.log(
     `POST /records/new | name: ${name}, date: ${date}, amount: ${amount}, userId: ${userId}, categoryId: ${categoryId}`
   );
@@ -76,7 +75,7 @@ router.post("/new", (req, res) => {
 
 router.get("/:id", (req, res) => {
   const id = req.params.id;
-  const userId = 1;
+  const userId = req.user.id;
   Record.isExists(id)
     .then((isExists) => {
       if (!isExists) {
@@ -121,15 +120,12 @@ router.put("/:id", (req, res) => {
     console.log("amount 為必填欄位");
     return;
   }
-  if (!utils.isValidParam(BODY, "userId")) {
-    console.log("userId 為必填欄位");
-    return;
-  }
   if (!utils.isValidParam(BODY, "categoryId")) {
     console.log("categoryId 為必填欄位");
     return;
   }
-  const { name, date, amount, userId, categoryId } = BODY;
+  const { name, date, amount, categoryId } = BODY;
+  const userId = req.user.id;
   console.log(
     `POST /records/new | name: ${name}, date: ${date}, amount: ${amount}, userId: ${userId}, categoryId: ${categoryId}`
   );
@@ -160,7 +156,8 @@ router.put("/:id", (req, res) => {
 
 router.delete("/:id", (req, res) => {
   const id = req.params.id;
-  Record.isExists(id)
+  const userId = req.user.id;
+  Record.isExists(id, userId)
     .then((isExists) => {
       if (!isExists) {
         console.log(`沒有 id 為 ${id} 的支出紀錄`);

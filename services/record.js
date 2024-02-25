@@ -80,9 +80,9 @@ class RecordService {
         });
     });
   }
-  isExists(id) {
+  isExists(id, userId) {
     return new Promise((resolve, reject) => {
-      RecordModel.count({ where: { id } })
+      RecordModel.count({ where: { id, userId } })
         .then((count) => {
           resolve(count > 0);
         })

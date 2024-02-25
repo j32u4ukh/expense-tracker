@@ -22,7 +22,14 @@ npx sequelize db:migrate
 npx sequelize db:seed:all
 ```
 
-### 4. 專案啟動
+### 4. 設置環境變數
+
+VS code in Windows
+```
+$env:NODE_ENV="development"
+```
+
+### 5. 專案啟動
 
 ```
 npm run dev

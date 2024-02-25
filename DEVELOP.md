@@ -43,7 +43,6 @@ npx sequelize model:generate --name record --attributes name:string,date:date,am
 npx sequelize db:migrate
 ```
 
-
 ### Step 4 添加數據解析用的中間件
 
 ```javascript
@@ -69,6 +68,22 @@ const methodOverride = require("method-override");
 
 // 「覆寫 (override)」HTTP 方法，允許表單傳送 GET 和 POST 以外的方法
 app.use(methodOverride("_method"));
+```
+
+### Step 6 
+
+```
+npm install connect-flash@0.1.1
+npm install express-session@1.17.3
+
+npm install passport@0.6.0 passport-facebook@3.0.0 passport-local@1.0.0
+
+npm install bcryptjs@2.4.3 dotenv@16.0.3
+```
+
+```javascript
+const flash = require("connect-flash");
+const session = require("express-session");
 ```
 
 ## 建立 Seeder 檔案
