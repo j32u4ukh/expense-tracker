@@ -22,20 +22,32 @@ npx sequelize db:migrate
 npx sequelize db:seed:all
 ```
 
-### 4. 設置環境變數
+### 4. 設置 .env
+
+複製一份 .env.example，命名為 .env，填入自己的參數
+
+```
+SESSION_SECRET=XXX
+PASSWORD=XXX
+FACEBOOK_CLIENT_ID=XXX
+FACEBOOK_CLIENT_SECRET=XXX
+FACEBOOK_CALLBACK_URL=http://localhost:3000/oauth2/redirect/facebook
+```
+
+### 5. 設置環境變數
 
 VS code in Windows
 ```
 $env:NODE_ENV="development"
 ```
 
-### 5. 專案啟動
+### 6. 專案啟動
 
 ```
 npm run dev
 ```
 
-### 6. 使用預設帳密登入
+### 7. 使用預設帳密登入
 
 廣志
 ```
