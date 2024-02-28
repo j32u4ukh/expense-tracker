@@ -1,5 +1,5 @@
 <div class="col-sm-3">
-  <select id="dropdown-menu" class="menu form-control" name="categoryId">
+  <select id="dropdown-menu" class="menu form-control" name="categoryId" {{#if record.categoryId}}data-cid="{{record.categoryId}}"{{/if}}>
     {{! 使用 option 標籤定義下拉菜單的選項 }}
     <option value="0">Select</option>
     <option value="1">家居物業</option>

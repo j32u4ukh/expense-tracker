@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const passport = require("../config/passport");
 const authHandler = require("../middlewares/auth-handler");
 
 // 支出記錄路由 API

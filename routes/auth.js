@@ -28,9 +28,6 @@ router.post(
     failureRedirect: "/login",
     failureFlash: true,
   })
-  // (req, res) => {
-  //   console.log(`body: ${JSON.stringify(req.body)}`);
-  // }
 );
 router.get(
   "/login/facebook",

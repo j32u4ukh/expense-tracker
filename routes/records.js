@@ -11,12 +11,9 @@ router.get("/", (req, res) => {
   const records = [];
   const categoryId = req.query.categoryId;
   let totalAmount = 0;
-  console.log(`categoryId: ${categoryId}`);
   Record.getRecords({ userId, categoryId })
     .then((datas) => {
-      console.log(`datas: ${JSON.stringify(datas)}`);
       datas.forEach((data) => {
-        console.log(`data: ${JSON.stringify(data)}`);
         totalAmount += Number(data.amount);
         data = Record.formatData(data);
         records.push(data);
@@ -26,7 +23,6 @@ router.get("/", (req, res) => {
       console.log(error);
     })
     .finally(() => {
-      console.log(`records: ${JSON.stringify(records)}`);
       res.render("index", { totalAmount, records });
     });
 });
@@ -76,7 +72,8 @@ router.post("/new", (req, res) => {
 router.get("/:id", (req, res) => {
   const id = req.params.id;
   const userId = req.user.id;
-  Record.isExists(id)
+  console.log(`id: ${id}, userId: ${userId}`);
+  Record.isExists(id, userId)
     .then((isExists) => {
       if (!isExists) {
         console.log(`沒有 id 為 ${id} 的支出紀錄`);
@@ -94,6 +91,7 @@ router.get("/:id", (req, res) => {
             name: data.name,
             date: data.date,
             amount: data.amount,
+            categoryId: data.categoryId,
           },
         });
       });
@@ -131,13 +129,14 @@ router.put("/:id", (req, res) => {
   );
   const id = req.params.id;
   console.log(`id: ${id}`);
-  Record.isExists(id)
+  Record.isExists(id, userId)
     .then((isExists) => {
       if (!isExists) {
         console.log(`沒有 id 為 ${id} 的支出紀錄`);
         return res.redirect("/records");
       }
       const record = { id, name, date, amount, userId, categoryId };
+      console.log(`New record: ${JSON.stringify(record)}`);
       Record.update(record)
         .then((ok) => {
           console.log(`ok: ${ok}`);

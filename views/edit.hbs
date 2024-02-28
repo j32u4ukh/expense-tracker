@@ -57,3 +57,11 @@
         </div>
     </div>
 </form>
+
+<script type="text/javascript">
+    const menu = document.querySelector('#dropdown-menu')
+    const cid = menu.dataset.cid;
+    if(cid){
+        menu.selectedIndex = cid
+    }
+</script>
