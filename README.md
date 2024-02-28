@@ -8,21 +8,28 @@
 npm install
 ```
 
-### 2. 生成資料庫表格(首次執行才需要)
+### 2. 設置環境變數
 
-須確保資料庫 alphacamp 存在
+VS code in Windows
+```
+$env:NODE_ENV="development"
+```
+
+### 3. 生成資料庫表格(首次執行才需要)
+
+須確保資料庫 `alphacamp` 存在
 
 ```
 npx sequelize db:migrate
 ```
 
-### 3. 透過 Seeder 生成初始數據(首次執行才需要)
+### 4. 透過 Seeder 生成初始數據(首次執行才需要)
 
 ```
 npx sequelize db:seed:all
 ```
 
-### 4. 設置 .env
+### 5. 設置 .env
 
 複製一份 .env.example，命名為 .env，填入自己的參數
 
@@ -32,13 +39,6 @@ PASSWORD=XXX
 FACEBOOK_CLIENT_ID=XXX
 FACEBOOK_CLIENT_SECRET=XXX
 FACEBOOK_CALLBACK_URL=http://localhost:3000/oauth2/redirect/facebook
-```
-
-### 5. 設置環境變數
-
-VS code in Windows
-```
-$env:NODE_ENV="development"
 ```
 
 ### 6. 專案啟動
