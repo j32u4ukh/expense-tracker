@@ -35,6 +35,20 @@ $env:NODE_ENV="development"
 npm run dev
 ```
 
+### 6. 使用預設帳密登入
+
+廣志
+```
+信箱: hiroshi@email.com
+密碼: password
+```
+
+小新
+```
+信箱: hiroshi@email.com
+密碼: password
+```
+
 ## 使用者功能：User story
 
 使用者可以：
